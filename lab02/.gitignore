@@ -1,0 +1,8 @@
+#ignorar el archivo del CMakelists 
+CMakelists.txt
+
+#ignorar el archivo Build 
+Build/
+
+#Ignorar el directorio .Vscode
+.vscode/
