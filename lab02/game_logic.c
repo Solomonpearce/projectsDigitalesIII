@@ -231,8 +231,6 @@ void L7seg(uint *led_on)
                 int32_t mask = bits[sec] << FIRST_GPIO;
                 int32_t maskG = 0x7F << FIRST_GPIO; // se cambia el valor de 7 pines
                 gpio_put_masked(maskG, mask);
-
-                // gpio_put(LED_PINS[FIRST_GPIO], (bits[sec] >> FIRST_GPIO)& 1);
                 gpio_put(GPIO_NPN2, 0);
                 gpio_put(GPIO_NPN3, 0);
                 gpio_put(GPIO_NPN1, 0);
@@ -247,8 +245,6 @@ void L7seg(uint *led_on)
 
                 int32_t mask1 = bits[sec2] << FIRST_GPIO;
                 gpio_put_masked(maskG, mask1);
-
-                // gpio_put(LED_PINS[FIRST_GPIO], (bits[sec2] >> FIRST_GPIO)& 1);
                 gpio_put(GPIO_NPN1, 0);
                 gpio_put(GPIO_NPN3, 0);
                 gpio_put(GPIO_NPN2, 0);
@@ -261,7 +257,6 @@ void L7seg(uint *led_on)
                 gpio_clr_mask(mask1);
                 int32_t mask2 = bits[min] << FIRST_GPIO;
                 gpio_put_masked(maskG, mask2);
-                // gpio_put(LED_PINS[FIRST_GPIO], (bits[min] >> FIRST_GPIO)& 1);
                 gpio_put(GPIO_NPN1, 0);
                 gpio_put(GPIO_NPN3, 0);
                 gpio_put(GPIO_NPN4, 0);
@@ -274,7 +269,6 @@ void L7seg(uint *led_on)
                 gpio_clr_mask(mask2);
                 int32_t mask3 = bits[min2] << FIRST_GPIO;
                 gpio_put_masked(maskG, mask3);
-                // gpio_put(LED_PINS[FIRST_GPIO], (bits[min2] >> FIRST_GPIO)& 1);
                 gpio_put(GPIO_NPN4, 0);
                 gpio_put(GPIO_NPN2, 0);
                 gpio_put(GPIO_NPN3, 0);
@@ -301,17 +295,11 @@ void L7seg(uint *led_on)
          * 
          * Estamos comenzando con GPIO 2, nuestro mapa de bits comienza en el bit 0, por lo que se desplaza para comenzar en 2.
          */
-        // int32_t mask = bits[val] << FIRST_GPIO;
-
         /**
          * @details
          * 
-         * ¡Establece todos nuestros GPIOs de una vez.
-         * Si algo más está usando GPIO, es posible que queramos usar gpio_put_masked()
+         * Establece todos nuestros GPIOs de una vez.
          */
-        // gpio_set_mask(mask);
-        // sleep_ms(250);
-        // gpio_clr_mask(mask);
     }
 }
 
@@ -330,10 +318,8 @@ void game_loop()
     {
         wait_for_button_press(); // Espera la presión del botón con debounce
         start_sequence();        // Inicia la secuencia de los LEDs
-        // Aquí ira el resto de la lógica del juego
         random_time();
         random_led(&led_on);
-
         L7seg(&led_on);
     }
 }
